@@ -27,14 +27,8 @@ fs.writeFileSync(versionFile, JSON.stringify(versionData, null, 2), 'utf8');
 
 console.log(`\n🚀 Bumping version to: v${newVersion}`);
 
-// HTML files to update in this directory
-const htmlFiles = [
-  'index.html',
-  'about.html',
-  'contact.html',
-  'privacy.html',
-  'terms.html'
-];
+// Dynamically read all HTML files in the current directory
+const htmlFiles = fs.readdirSync(__dirname).filter(file => file.endsWith('.html'));
 
 htmlFiles.forEach(file => {
   const filePath = path.join(__dirname, file);
