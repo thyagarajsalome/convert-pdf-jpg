@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free PDF to JPG Converter Online - 100% Free & Private | convertpdftojpg.in</title>
+  <meta name="description" content="Convert your PDF files to high-quality JPG, PNG, or WebP images instantly in your browser. 100% private, free, and secure. Files never leave your device. No size limits.">
+  <meta name="keywords" content="pdf to jpg, convert pdf to jpg, pdf to image, local pdf converter, free pdf converter online, secure pdf to jpeg, pdf to png, pdf to webp">
+  <meta name="author" content="convertpdftojpg.in">
+  <meta name="google-site-verification" content="eIGuoLHf4b-3BLZA7nzDjmk39z12c7ICZQcmt4RVkYU" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼️</text></svg>">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- PDF.js & JSZip Libraries from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body data-theme="dark">
+
+  <!-- Background Decorative Glowing Lights -->
+  <div class="glow-bg"></div>
+  <div class="glow-bg-secondary"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fa-solid fa-file-image"></i>
+        <span>convertpdf<span class="gradient-text">tojpg</span>.in</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+          <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
+            <i class="fa-solid fa-sun"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1>Convert PDF to Images <span class="gradient-text">Instantly & Privately</span></h1>
+      <p>Free, browser-based conversion. Files are processed locally on your computer, guaranteeing 100% data safety, speed, and privacy.</p>
+    </section>
+
+    <!-- Ad Space (Top Placement - Compliant with Google AdSense Policies) -->
+    <div class="ad-slot" id="top-ad-slot">
+      <span>ADVERTISEMENT PLACEHOLDER (NON-INTRUSIVE HEADER AD)</span>
+    </div>
+
+    <!-- Converter Section -->
+    <section class="converter-container">
+      
+      <!-- Drag & Drop Zone -->
+      <div class="drop-zone" id="drop-zone">
+        <div class="drop-zone-icon">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+        </div>
+        <div class="drop-zone-text">Drag & drop your PDF file here</div>
+        <div class="drop-zone-subtext">or click to browse from your device (Supports files up to 200MB)</div>
+        <input type="file" id="file-input" accept="application/pdf">
+      </div>
+
+      <!-- File Details Card (Visible after file select) -->
+      <div class="file-meta-card" id="file-meta-card" style="display: none;">
+        <div class="file-info">
+          <div class="file-icon"><i class="fa-solid fa-file-pdf"></i></div>
+          <div class="file-details">
+            <div class="file-name" id="file-name">document.pdf</div>
+            <div class="file-size" id="file-size">0 KB</div>
+          </div>
+        </div>
+        <button class="remove-btn" id="remove-btn" title="Remove file">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Advanced Features Option Grid (Unique to convertpdftojpg.in) -->
+      <div class="options-grid">
+        <!-- DPI selector -->
+        <div class="control-panel-group">
+          <div class="panel-title"><i class="fa-solid fa-expand"></i> Output DPI (Resolution)</div>
+          <div class="dpi-selector">
+            <button type="button" class="dpi-btn" data-dpi="150" title="Low resolution for tiny file sizes">150 DPI</button>
+            <button type="button" class="dpi-btn active" data-dpi="300" title="Medium resolution, ideal balance of quality">300 DPI</button>
+            <button type="button" class="dpi-btn" data-dpi="450" title="High resolution print quality">450 DPI</button>
+          </div>
+        </div>
+
+        <!-- Format Selector -->
+        <div class="control-panel-group">
+          <div class="panel-title"><i class="fa-solid fa-image"></i> Output Image Format</div>
+          <div class="format-selector">
+            <button type="button" class="format-btn active" data-format="image/jpeg" title="Standard JPG file compression">JPG</button>
+            <button type="button" class="format-btn" data-format="image/png" title="Lossless transparency PNG format">PNG</button>
+            <button type="button" class="format-btn" data-format="image/webp" title="Next-gen high web compression">WebP</button>
+          </div>
+        </div>
+
+        <!-- Quality Range Slider -->
+        <div class="control-panel-group">
+          <div class="panel-title"><i class="fa-solid fa-sliders"></i> Compression Quality</div>
+          <div class="slider-container">
+            <input type="range" id="quality-slider" class="range-slider" min="10" max="100" value="90">
+            <span class="slider-val" id="quality-val">90%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Area -->
+      <div class="actions-container">
+        <button type="button" class="btn-primary" id="convert-btn" disabled>
+          <i class="fa-solid fa-gears"></i>
+          <span>Convert PDF Pages</span>
+        </button>
+      </div>
+
+      <!-- Live Progress Bar -->
+      <div class="progress-container" id="progress-container">
+        <div class="progress-status">
+          <span id="progress-text">Preparing document...</span>
+          <span id="progress-percent">0%</span>
+        </div>
+        <div class="progress-bar-wrapper">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- Live Previews Grid -->
+      <div class="preview-section" id="preview-section">
+        <div class="preview-header">
+          <h2>Interactive Previews</h2>
+          <div class="preview-grid-controls">
+            <button type="button" class="btn-secondary" id="select-all-btn">Select All</button>
+            <button type="button" class="btn-secondary" id="deselect-all-btn">Deselect All</button>
+            <button type="button" class="btn-primary" id="download-all-btn" disabled>
+              <i class="fa-solid fa-file-zipper"></i>
+              <span>Download All (ZIP)</span>
+            </button>
+          </div>
+        </div>
+        <div class="preview-grid" id="preview-grid">
+          <!-- Dynamically populated page cards will appear here -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Ad Space (Middle Placement) -->
+    <div class="ad-slot" id="middle-ad-slot">
+      <span>ADVERTISEMENT PLACEHOLDER (IN-FEED INTERSTITIAL AD)</span>
+    </div>
+
+    <!-- SEO Content Section & FAQs (Crucial for AdSense Approval) -->
+    <section class="info-section">
+      
+      <!-- Informative SEO text explaining benefits -->
+      <div class="seo-content">
+        <h2>The Safest Way to Convert PDF to JPG Online</h2>
+        <p>Most traditional web-based conversion tools require you to upload your PDF files to their servers. This presents severe data safety risks, especially for confidential receipts, government forms, or medical paperwork. **convertpdftojpg.in** implements a next-gen local engine. All rendering and conversion processes are executed locally on your own computer. Your files are processed inside your browser and are never uploaded, keeping your data completely private.</p>
+        
+        <div class="steps-timeline">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h3>Select & Configure</h3>
+              <p>Upload your PDF document. Select your preferred output parameters like resolution (DPI), file format (JPG, PNG, WebP), and quality.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h3>Convert & Edit</h3>
+              <p>Watch as pages render instantly. Rotate pages individually or select specific pages to download, ignoring unnecessary blank sheets.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h3>Download instantly</h3>
+              <p>Download individual files directly or compile your customized selection into a single compressed ZIP archive.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar with Guarantee & FAQs -->
+      <div class="sidebar">
+        
+        <div class="guarantee-card">
+          <i class="fa-solid fa-shield-halved"></i>
+          <h3>100% Privacy Gurantee</h3>
+          <p>Your PDF files are converted offline inside your browser. No files are transferred to any server. Your information remains completely confidential.</p>
+        </div>
+
+        <div class="faq-accordion">
+          <h2>Frequently Asked Questions</h2>
+          
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Is my data safe here?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. All conversions run locally on your device via Javascript and WebAssembly. Your files are never transferred to a server, making it 100% secure and fully private.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Are there file size limits?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Since your local computer resources are used to process the files, we support files up to 200MB! Most competitors cap free users at 10-20MB, making our tool ideal for large ebooks and documents.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>What outputs can I export?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>You can convert PDF pages to standard JPG, lossless PNG, or next-generation WebP images. You can also customize quality to meet specific filesize rules (e.g. under 100kb for government exam portals).</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Can I rotate and select specific pages?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. Each page preview has individual rotation buttons and a custom checkmark selection box. You can rotate pages and only select specific ones to download, skipping unwanted content.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <i class="fa-solid fa-file-image"></i>
+          <span>convertpdf<span class="gradient-text">tojpg</span>.in</span>
+        </a>
+        <p>A fast, free, secure utility to convert your PDF files into high-quality JPEG images instantly in your browser.</p>
+      </div>
+      
+      <div class="footer-links-group">
+        <div class="footer-column">
+          <h4>Utility</h4>
+          <ul>
+            <li><a href="index.html">PDF to JPG Converter</a></li>
+            <li><a href="index.html#how-it-works">How it Works</a></li>
+            <li><a href="index.html#faqs">FAQ</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Support</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 convertpdftojpg.in. All rights reserved.</p>
+      <p>Processed locally for absolute security.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="app.js"></script>
+</body>
+</html>
