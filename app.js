@@ -18,7 +18,8 @@ const translations = {
     downloadSelected: (count) => `Download Selected (${count}) (ZIP)`,
     downloadSelectedPlaceholder: 'Download Selected (ZIP)',
     packagingZip: 'Packaging ZIP...',
-    failedZip: 'Failed to package zip file.'
+    failedZip: 'Failed to package zip file.',
+    convertBtnText: (format) => `Convert PDF to ${format}`
   },
   hi: {
     invalidFormat: 'अमान्य फ़ाइल स्वरूप। कृपया एक पीडीएफ फ़ाइल अपलोड करें।',
@@ -34,7 +35,8 @@ const translations = {
     downloadSelected: (count) => `चुने गए डाउनलोड करें (${count}) (ZIP)`,
     downloadSelectedPlaceholder: 'चुने गए डाउनलोड करें (ZIP)',
     packagingZip: 'ZIP फ़ाइल तैयार की जा रही है...',
-    failedZip: 'ZIP फ़ाइल तैयार करने में विफल।'
+    failedZip: 'ZIP फ़ाइल तैयार करने में विफल।',
+    convertBtnText: (format) => `पीडीएफ को ${format} में बदलें`
   }
 };
 const t = isHindi ? translations.hi : translations.en;
@@ -204,11 +206,23 @@ dpiBtns.forEach(btn => {
   });
 });
 
+const updateConvertBtnLabel = () => {
+  const ext = currentFormat.split('/')[1];
+  const formatName = ext === 'jpeg' ? 'JPG' : ext.toUpperCase();
+  const labelText = convertBtn.querySelector('span');
+  if (labelText) {
+    labelText.textContent = t.convertBtnText(formatName);
+  }
+};
+
 formatBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     formatBtns.forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     currentFormat = btn.dataset.format;
+    
+    // Update the conversion button's label based on selected image type
+    updateConvertBtnLabel();
     
     // WebP and JPG support quality; PNG does not
     if (currentFormat === 'image/png') {
@@ -521,5 +535,6 @@ downloadAllBtn.addEventListener('click', async () => {
   }
 });
 
-// Initialize Theme
+// Initialize Theme & Button Label
 initTheme();
+updateConvertBtnLabel();
