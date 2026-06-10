@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free JPG to PDF Converter Online - 100% Free & Private | convertpdftojpg.in</title>
-  <meta name="description" content="Convert your JPG, PNG, and WebP images into a single high-quality PDF document instantly in your browser. 100% private, free, and secure.">
-  <meta name="keywords" content="jpg to pdf, convert image to pdf, png to pdf, webp to pdf, online image to pdf converter, local image to pdf, free image to pdf converter">
+  <title>Free Online PDF Merger - 100% Free & Private | convertpdftojpg.in</title>
+  <meta name="description" content="Merge multiple PDF files into a single document instantly in your browser. 100% private, free, and secure. Files never leave your device.">
+  <meta name="keywords" content="merge pdf, combine pdf online, merge pdf files, local pdf merger, free pdf merger, join pdf documents, merge pdf free">
   <meta name="author" content="convertpdftojpg.in">
   
   <!-- Favicon -->
@@ -22,8 +22,8 @@
   <!-- Stylesheets -->
   <link rel="stylesheet" href="styles.css">
   
-  <!-- jsPDF Library from CDN -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- pdf-lib Library from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 </head>
 <body data-theme="dark">
 
@@ -40,9 +40,9 @@
       </a>
       <ul class="nav-links">
         <li><a href="index.html">PDF to JPG</a></li>
-        <li><a href="jpg-to-pdf.html" class="active">JPG to PDF</a></li>
+        <li><a href="jpg-to-pdf.html">JPG to PDF</a></li>
         <li><a href="compress-pdf.html">Compress PDF</a></li>
-        <li><a href="merge-pdf.html">Merge PDF</a></li>
+        <li><a href="merge-pdf.html" class="active">Merge PDF</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li>
@@ -59,8 +59,8 @@
     
     <!-- Hero Section -->
     <section class="hero-section">
-      <h1>Convert Images to PDF <span class="gradient-text">Instantly & Privately</span></h1>
-      <p>Free, browser-based converter. Merge multiple JPG, PNG, or WebP images into a single PDF locally without uploading files.</p>
+      <h1>Merge PDF Files <span class="gradient-text">Instantly & Privately</span></h1>
+      <p>Free, browser-based PDF merger. Combine multiple PDF documents locally into a single file without uploading data.</p>
     </section>
 
     <!-- Ad Space (Top Placement) -->
@@ -74,71 +74,38 @@
       <!-- Drag & Drop Zone -->
       <div class="drop-zone" id="drop-zone">
         <div class="drop-zone-icon">
-          <i class="fa-solid fa-images"></i>
+          <i class="fa-solid fa-file-shield"></i>
         </div>
-        <div class="drop-zone-text">Drag & drop your images here</div>
-        <div class="drop-zone-subtext">or click to browse files (Supports JPG, JPEG, PNG, WebP)</div>
-        <input type="file" id="file-input" accept="image/jpeg, image/jpg, image/png, image/webp" multiple>
+        <div class="drop-zone-text">Drag & drop your PDF files here</div>
+        <div class="drop-zone-subtext">or click to browse multiple PDFs (Select 2 or more files)</div>
+        <input type="file" id="file-input" accept="application/pdf" multiple>
       </div>
 
-      <!-- File List & Previews (Dynamic Area) -->
+      <!-- File List (Dynamic Area) -->
       <div class="preview-section" id="preview-section" style="display: none; border-top: none; padding-top: 0;">
         <div class="preview-header" style="margin-bottom: 1.5rem;">
-          <h2>Uploaded Images</h2>
+          <h2>Uploaded PDFs to Merge</h2>
           <div class="preview-grid-controls">
             <button type="button" class="btn-secondary" id="clear-all-btn">Clear All</button>
           </div>
         </div>
-        <div class="preview-grid" id="preview-grid" style="margin-bottom: 2rem;">
-          <!-- Dynamically populated image cards will appear here -->
-        </div>
-      </div>
-
-      <!-- Advanced Features Option Grid -->
-      <div class="options-grid">
-        <!-- Page Layout Selector -->
-        <div class="control-panel-group">
-          <div class="panel-title"><i class="fa-solid fa-file-invoice"></i> Page Format</div>
-          <div class="format-selector" id="page-size-selector">
-            <button type="button" class="format-btn active" data-size="a4" title="Standard European format">A4</button>
-            <button type="button" class="format-btn" data-size="letter" title="Standard US Letter format">US Letter</button>
-            <button type="button" class="format-btn" data-size="fit" title="Adjust page size to match image layout">Fit Image</button>
-          </div>
-        </div>
-
-        <!-- Orientation Selector -->
-        <div class="control-panel-group">
-          <div class="panel-title"><i class="fa-solid fa-rotate"></i> Page Orientation</div>
-          <div class="format-selector" id="orientation-selector">
-            <button type="button" class="format-btn active" data-orient="portrait" title="Vertical pages">Portrait</button>
-            <button type="button" class="format-btn" data-orient="landscape" title="Horizontal pages">Landscape</button>
-            <button type="button" class="format-btn" data-orient="auto" title="Matches image orientation">Auto</button>
-          </div>
-        </div>
-
-        <!-- Margins Selector -->
-        <div class="control-panel-group">
-          <div class="panel-title"><i class="fa-solid fa-border-all"></i> Page Margins</div>
-          <div class="format-selector" id="margin-selector">
-            <button type="button" class="format-btn active" data-margin="none" title="No margins - image fills the page">None</button>
-            <button type="button" class="format-btn" data-margin="small" title="Thin border margin">Small</button>
-            <button type="button" class="format-btn" data-margin="large" title="Thicker document margin">Normal</button>
-          </div>
+        <div class="preview-grid" id="preview-grid" style="grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); margin-bottom: 2rem;">
+          <!-- Dynamically populated PDF cards will appear here -->
         </div>
       </div>
 
       <!-- Action Area -->
       <div class="actions-container">
         <button type="button" class="btn-primary" id="convert-btn" disabled>
-          <i class="fa-solid fa-file-pdf"></i>
-          <span>Create PDF Document</span>
+          <i class="fa-solid fa-link"></i>
+          <span>Merge PDF Documents</span>
         </button>
       </div>
 
       <!-- Live Progress Bar -->
       <div class="progress-container" id="progress-container">
         <div class="progress-status">
-          <span id="progress-text">Preparing pages...</span>
+          <span id="progress-text">Reading PDF files...</span>
           <span id="progress-percent">0%</span>
         </div>
         <div class="progress-bar-wrapper">
@@ -158,31 +125,31 @@
       
       <!-- Informative SEO text explaining benefits -->
       <div class="seo-content">
-        <h2>Fast and Secure JPG to PDF Converter</h2>
-        <p>Do you need to merge scan documents, photos, receipts, or portfolios into a single clean PDF? Our **JPG to PDF** converter is built to run 100% locally. By converting images directly inside your web browser, you avoid long upload wait times and ensure that sensitive personal documents (like passport scans or tax forms) are never stored on a third-party server.</p>
+        <h2>Merge PDFs Online Safely</h2>
+        <p>Combining separate documents into a single PDF file is a standard everyday task for students, businesses, and administrators. Our **Merge PDF** tool is built to run 100% offline in your browser. Since we load and compile your files inside your device's memory, you avoid uploading private contracts or identity forms to external servers, securing your confidential details completely.</p>
         
         <div class="steps-timeline">
           <div class="step-item">
             <div class="step-num">1</div>
             <div class="step-text">
-              <h3>Upload Your Images</h3>
-              <p>Drag and drop multiple photos (JPG, PNG, or WebP) or click to browse files from your computer or smartphone.</p>
+              <h3>Upload PDF Files</h3>
+              <p>Drag and drop multiple PDF documents into the drop zone, or browse from your local folder.</p>
             </div>
           </div>
           
           <div class="step-item">
             <div class="step-num">2</div>
             <div class="step-text">
-              <h3>Adjust Formatting</h3>
-              <p>Set your page dimensions (A4, Letter, or Fit to Image), control margins, and match page orientation to fit portrait or landscape photos.</p>
+              <h3>Arrange Merge Order</h3>
+              <p>Rearrange your files in the preview grid using the directional arrows to make sure your pages appear in the correct order.</p>
             </div>
           </div>
           
           <div class="step-item">
             <div class="step-num">3</div>
             <div class="step-text">
-              <h3>Generate PDF</h3>
-              <p>Click "Create PDF" to compile your images into a single document instantly and download it directly.</p>
+              <h3>Combine PDF</h3>
+              <p>Click "Merge PDF Documents" to compile the files instantly in your browser and download the unified PDF file.</p>
             </div>
           </div>
         </div>
@@ -192,9 +159,9 @@
       <div class="sidebar">
         
         <div class="guarantee-card">
-          <i class="fa-solid fa-lock"></i>
-          <h3>Zero Upload Policy</h3>
-          <p>We respect your privacy. All files are rendered local-only using HTML5 API. No data is stored, shared, or compiled on external hosting platforms.</p>
+          <i class="fa-solid fa-circle-nodes"></i>
+          <h3>Secure Local Merging</h3>
+          <p>This utility relies on the client-side `pdf-lib` engine. Your documents are opened, combined, and saved locally inside your web browser. No network uploads occur.</p>
         </div>
 
         <div class="faq-accordion">
@@ -202,41 +169,41 @@
           
           <div class="faq-item">
             <button class="faq-question">
-              <span>Is my data private?</span>
+              <span>Is my document privacy guaranteed?</span>
               <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="faq-answer">
-              <p>Yes, completely. The conversion runs entirely client-side using JavaScript. Your images never leave your browser, making it 100% secure for certificates, ID cards, and private documentation.</p>
+              <p>Yes. The merging script runs completely client-side in Javascript. Your files are never sent to a server, keeping your data 100% private and protected.</p>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question">
-              <span>What image types can I convert?</span>
+              <span>Can I choose the page sequence?</span>
               <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="faq-answer">
-              <p>You can upload and convert JPG, JPEG, PNG, and WebP files. You can mix and match different formats in a single upload to merge them into one PDF.</p>
+              <p>Yes. After selecting your PDF files, they are listed in a grid. You can use the left/right arrows on each document card to change the sequence before triggering the merge.</p>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question">
-              <span>Can I rearrange or delete uploaded photos?</span>
+              <span>Is there a limit on file quantity or size?</span>
               <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="faq-answer">
-              <p>Yes. After selecting your images, they appear in a preview list. You can remove individual files or rearrange them to make sure your pages appear in the correct chronological order in the generated PDF.</p>
+              <p>No. There are no restrictions on the file size or quantity of PDFs you can merge. Since processing utilizes your own device resources, you can merge very large documents without paywall blocks.</p>
             </div>
           </div>
 
           <div class="faq-item">
             <button class="faq-question">
-              <span>Is there a page limit?</span>
+              <span>Does the output PDF retain quality?</span>
               <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div class="faq-answer">
-              <p>No, there are no limits on the number of pages or files you can upload. Since your own device handles the PDF compilation, you can generate large document packages without any restrictions.</p>
+              <p>Yes. Unlike compressors, the merger tool copies the original PDF page objects (including selectable text, layout forms, and high-resolution images) directly into the new unified PDF without re-encoding, preserving 100% of the original quality.</p>
             </div>
           </div>
 
@@ -295,6 +262,6 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="jpg-to-pdf.js"></script>
+  <script src="merge-pdf.js"></script>
 </body>
 </html>
