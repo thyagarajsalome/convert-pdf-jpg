@@ -45,10 +45,10 @@ htmlFiles.forEach(file => {
   
   let content = fs.readFileSync(filePath, 'utf8');
   
-  // Check if span placeholder exists
-  const spanRegex = /<span id="app-version">v\d+\.\d+\.\d+<\/span>/;
+  // Check if span placeholder exists (supports optional style attributes)
+  const spanRegex = /<span id="app-version"[^>]*>v\d+\.\d+\.\d+<\/span>/;
   if (spanRegex.test(content)) {
-    content = content.replace(spanRegex, `<span id="app-version">v${newVersion}</span>`);
+    content = content.replace(spanRegex, `<span id="app-version" style="margin-left: 8px; opacity: 0.6; font-size: 0.85em;">v${newVersion}</span>`);
     console.log(`✅ Updated version to v${newVersion} in ${file}`);
   } else {
     // Inject it for the first time next to copyright notice
