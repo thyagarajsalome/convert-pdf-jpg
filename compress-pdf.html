@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Online PDF Compressor - 100% Free & Private | convertpdftojpg.in</title>
+  <meta name="description" content="Compress PDF files online and reduce document size instantly in your browser. 100% private, free, and secure. Files never leave your device.">
+  <meta name="keywords" content="compress pdf, reduce pdf size, shrink pdf online, local pdf compressor, free pdf compressor, pdf size reducer, compress pdf to 100kb">
+  <meta name="author" content="convertpdftojpg.in">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼️</text></svg>">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- PDF.js & jsPDF Libraries from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body data-theme="dark">
+
+  <!-- Background Decorative Glowing Lights -->
+  <div class="glow-bg"></div>
+  <div class="glow-bg-secondary"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="index.html" class="logo">
+        <i class="fa-solid fa-file-image"></i>
+        <span>convertpdf<span class="gradient-text">tojpg</span>.in</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">PDF to JPG</a></li>
+        <li><a href="jpg-to-pdf.html">JPG to PDF</a></li>
+        <li><a href="compress-pdf.html" class="active">Compress PDF</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+          <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
+            <i class="fa-solid fa-moon"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1>Reduce PDF File Size <span class="gradient-text">Instantly & Privately</span></h1>
+      <p>Free, browser-based PDF compressor. Shrink your PDF documents locally without uploading files to any external server.</p>
+    </section>
+
+    <!-- Ad Space (Top Placement) -->
+    <div class="ad-slot" id="top-ad-slot">
+      <span>ADVERTISEMENT PLACEHOLDER (NON-INTRUSIVE HEADER AD)</span>
+    </div>
+
+    <!-- Converter Section -->
+    <section class="converter-container">
+      
+      <!-- Drag & Drop Zone -->
+      <div class="drop-zone" id="drop-zone">
+        <div class="drop-zone-icon">
+          <i class="fa-solid fa-file-contract"></i>
+        </div>
+        <div class="drop-zone-text">Drag & drop your PDF file here</div>
+        <div class="drop-zone-subtext">or click to browse from your device (Supports files up to 150MB)</div>
+        <input type="file" id="file-input" accept="application/pdf">
+      </div>
+
+      <!-- File Details Card (Visible after file select) -->
+      <div class="file-meta-card" id="file-meta-card" style="display: none;">
+        <div class="file-info">
+          <div class="file-icon"><i class="fa-solid fa-file-pdf"></i></div>
+          <div class="file-details">
+            <div class="file-name" id="file-name">document.pdf</div>
+            <div class="file-size" id="file-size">0 KB</div>
+          </div>
+        </div>
+        <button class="remove-btn" id="remove-btn" title="Remove file">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Advanced Features Option Grid -->
+      <div class="options-grid">
+        <!-- Compression Level Preset -->
+        <div class="control-panel-group">
+          <div class="panel-title"><i class="fa-solid fa-gauge-high"></i> Compression Level</div>
+          <div class="format-selector" id="compression-selector">
+            <button type="button" class="format-btn" data-level="extreme" title="Maximum size reduction, lower image resolution">Extreme</button>
+            <button type="button" class="format-btn active" data-level="recommended" title="Standard web compression, ideal quality balance">Recommended</button>
+            <button type="button" class="format-btn" data-level="low" title="High image resolution, minimal compression">Low</button>
+          </div>
+        </div>
+
+        <!-- Target DPI (Hidden in standard presets, but customized) -->
+        <div class="control-panel-group">
+          <div class="panel-title"><i class="fa-solid fa-maximize"></i> Max Image DPI</div>
+          <div class="format-selector" id="dpi-selector">
+            <button type="button" class="format-btn" data-dpi="72" title="72 DPI screen resolution">72 DPI</button>
+            <button type="button" class="format-btn active" data-dpi="150" title="150 DPI web document standard">150 DPI</button>
+            <button type="button" class="format-btn" data-dpi="220" title="220 DPI print standard">220 DPI</button>
+          </div>
+        </div>
+
+        <!-- Quality Range Slider -->
+        <div class="control-panel-group">
+          <div class="panel-title"><i class="fa-solid fa-sliders"></i> JPEG Quality</div>
+          <div class="slider-container">
+            <input type="range" id="quality-slider" class="range-slider" min="10" max="100" value="70">
+            <span class="slider-val" id="quality-val">70%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Area -->
+      <div class="actions-container">
+        <button type="button" class="btn-primary" id="convert-btn" disabled>
+          <i class="fa-solid fa-compress"></i>
+          <span>Compress PDF</span>
+        </button>
+      </div>
+
+      <!-- Live Progress Bar -->
+      <div class="progress-container" id="progress-container">
+        <div class="progress-status">
+          <span id="progress-text">Analyzing PDF document...</span>
+          <span id="progress-percent">0%</span>
+        </div>
+        <div class="progress-bar-wrapper">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- Success Details Card (Visible after compression success) -->
+      <div class="file-meta-card" id="success-card" style="display: none; background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.2); flex-direction: column; gap: 1.5rem; align-items: stretch;">
+        <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+          <div class="file-info">
+            <div class="file-icon" style="color: var(--success);"><i class="fa-solid fa-circle-check"></i></div>
+            <div class="file-details">
+              <div class="file-name" style="font-weight: 800;">Compression Complete!</div>
+              <div class="file-size" id="compression-savings">Reduced from 5.0 MB to 1.2 MB (Saved 76%)</div>
+            </div>
+          </div>
+        </div>
+        
+        <button type="button" class="btn-primary" id="download-compressed-btn" style="align-self: flex-start; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.35); background: linear-gradient(135deg, #10b981 0%, #059669 100%);">
+          <i class="fa-solid fa-download"></i>
+          <span>Download Compressed PDF</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- Ad Space (Middle Placement) -->
+    <div class="ad-slot" id="middle-ad-slot">
+      <span>ADVERTISEMENT PLACEHOLDER (IN-FEED INTERSTITIAL AD)</span>
+    </div>
+
+    <!-- SEO Content Section & FAQs -->
+    <section class="info-section">
+      
+      <!-- Informative SEO text explaining benefits -->
+      <div class="seo-content">
+        <h2>How to Compress PDF Online Safely</h2>
+        <p>Whether you need to upload your resume for a job application or submit scanned educational certificates to government exam portals, file size restrictions are a major headache. **convertpdftojpg.in** offers a premium client-side compressor tool. Because the script processes the PDF internally inside your web browser, it is **100% secure**—documents are never uploaded to any server and your data privacy is fully guaranteed.</p>
+        
+        <div class="steps-timeline">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h3>Select File</h3>
+              <p>Drag and drop your PDF file or click to browse files from your computer or smartphone.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h3>Choose Level</h3>
+              <p>Select "Extreme" for maximum size reduction (great for strict 100KB limits), "Recommended" for standard files, or customized slider parameters.</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h3>Download Result</h3>
+              <p>Wait a few seconds for the offline compression process to complete, check your savings percentage, and download your new PDF instantly.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar with Guarantee & FAQs -->
+      <div class="sidebar">
+        
+        <div class="guarantee-card">
+          <i class="fa-solid fa-shield-halved"></i>
+          <h3>Data Security Notice</h3>
+          <p>This is a local offline service. Your uploaded PDF files are read and compressed directly inside your device's memory. No document data is ever stored on the web.</p>
+        </div>
+
+        <div class="faq-accordion">
+          <h2>Frequently Asked Questions</h2>
+          
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>How does this compressor work?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>The tool parses your PDF page-by-page, rendering them into high-efficiency compressed JPEGs using canvas controls, and recompiles them into a new lightweight PDF document. This removes unnecessary structural metadata and compresses images, saving massive file size.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Will the text in my PDF remain readable?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. Even at the Extreme setting (72 DPI), text remains legible for human reading. However, note that because compression converts pages to high-efficiency image states internally, original selectable text formatting is replaced by flat layout images, making it perfect for scanned forms and certificate submittals.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Is this tool free of cost?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Yes. All PDF utilities on convertpdftojpg.in are entirely free, unlimited, and require no account registration or email entries.</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>Is my document privacy guaranteed?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>Absolutely. Because the code runs entirely in your browser window, your documents never touch a third-party server. Your privacy is 100% guaranteed, satisfying strict business confidentiality standards.</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <i class="fa-solid fa-file-image"></i>
+          <span>convertpdf<span class="gradient-text">tojpg</span>.in</span>
+        </a>
+        <p>A fast, free, secure utility to convert your PDF files into high-quality JPEG images instantly in your browser.</p>
+      </div>
+      
+      <div class="footer-links-group">
+        <div class="footer-column">
+          <h4>Utility</h4>
+          <ul>
+            <li><a href="index.html">PDF to JPG Converter</a></li>
+            <li><a href="jpg-to-pdf.html">JPG to PDF Converter</a></li>
+            <li><a href="compress-pdf.html">Compress PDF Converter</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact Support</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 convertpdftojpg.in. All rights reserved. <span id="app-version" style="margin-left: 8px; opacity: 0.6; font-size: 0.85em;">v1.0.7</span></p>
+      <p>Processed locally for absolute security.</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="compress-pdf.js"></script>
+</body>
+</html>
