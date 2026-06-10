@@ -1,6 +1,44 @@
 // Set PDF.js worker source
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
+// Language Localization
+const isHindi = document.documentElement.lang === 'hi';
+const translations = {
+  en: {
+    invalidFormat: 'Invalid file format. Please upload a PDF file.',
+    readingPdf: 'Reading PDF...',
+    renderingPage: (i, total) => `Rendering page ${i} of ${total}...`,
+    conversionComplete: 'Conversion complete!',
+    errorConverting: 'Error converting PDF. Please ensure the document is not corrupted or password protected.',
+    pageNumber: (num) => `Page ${num}`,
+    downloadThisPage: 'Download this page',
+    rotateCCW: 'Rotate Counter-Clockwise',
+    rotateCW: 'Rotate Clockwise',
+    downloadAll: 'Download All (ZIP)',
+    downloadSelected: (count) => `Download Selected (${count}) (ZIP)`,
+    downloadSelectedPlaceholder: 'Download Selected (ZIP)',
+    packagingZip: 'Packaging ZIP...',
+    failedZip: 'Failed to package zip file.'
+  },
+  hi: {
+    invalidFormat: 'अमान्य फ़ाइल स्वरूप। कृपया एक पीडीएफ फ़ाइल अपलोड करें।',
+    readingPdf: 'पीडीएफ पढ़ी जा रही है...',
+    renderingPage: (i, total) => `पेज ${i} का ${total} रेंडर किया जा रहा है...`,
+    conversionComplete: 'रूपांतरण पूरा हुआ!',
+    errorConverting: 'पीडीएफ को बदलने में त्रुटि। कृपया सुनिश्चित करें कि दस्तावेज़ दूषित या पासवर्ड सुरक्षित नहीं है।',
+    pageNumber: (num) => `पेज ${num}`,
+    downloadThisPage: 'इस पेज को डाउनलोड करें',
+    rotateCCW: 'वामावर्त घुमाएं',
+    rotateCW: 'दक्षिणावर्त घुमाएं',
+    downloadAll: 'सभी डाउनलोड करें (ZIP)',
+    downloadSelected: (count) => `चुने गए डाउनलोड करें (${count}) (ZIP)`,
+    downloadSelectedPlaceholder: 'चुने गए डाउनलोड करें (ZIP)',
+    packagingZip: 'ZIP फ़ाइल तैयार की जा रही है...',
+    failedZip: 'ZIP फ़ाइल तैयार करने में विफल।'
+  }
+};
+const t = isHindi ? translations.hi : translations.en;
+
 // DOM Elements
 const dropZone = document.getElementById('drop-zone');
 const fileInput = document.getElementById('file-input');
@@ -105,7 +143,7 @@ fileInput.addEventListener('change', (e) => {
 // Handle File Selection
 const handleFileSelect = (file) => {
   if (file.type !== 'application/pdf' && !file.name.endsWith('.pdf')) {
-    alert('Invalid file format. Please upload a PDF file.');
+    alert(t.invalidFormat);
     return;
   }
   
@@ -224,7 +262,7 @@ convertBtn.addEventListener('click', async () => {
   progressContainer.style.display = 'flex';
   progressBar.style.width = '0%';
   progressPercent.textContent = '0%';
-  progressText.textContent = 'Reading PDF...';
+  progressText.textContent = t.readingPdf;
   
   const reader = new FileReader();
   
@@ -237,7 +275,7 @@ convertBtn.addEventListener('click', async () => {
       previewSection.style.display = 'flex';
       
       for (let i = 1; i <= numPages; i++) {
-        progressText.textContent = `Rendering page ${i} of ${numPages}...`;
+        progressText.textContent = t.renderingPage(i, numPages);
         
         await renderSinglePage(i);
         
@@ -246,7 +284,7 @@ convertBtn.addEventListener('click', async () => {
         progressPercent.textContent = `${percent}%`;
       }
       
-      progressText.textContent = 'Conversion complete!';
+      progressText.textContent = t.conversionComplete;
       downloadAllBtn.removeAttribute('disabled');
       removeBtn.removeAttribute('disabled');
       convertBtn.removeAttribute('disabled');
@@ -255,7 +293,7 @@ convertBtn.addEventListener('click', async () => {
       previewSection.scrollIntoView({ behavior: 'smooth' });
     } catch (error) {
       console.error(error);
-      alert('Error converting PDF. Please ensure the document is not corrupted or password protected.');
+      alert(t.errorConverting);
       convertBtn.removeAttribute('disabled');
       removeBtn.removeAttribute('disabled');
       progressContainer.style.display = 'none';
@@ -366,11 +404,11 @@ const createPageCard = (pageNum, renderedCanvas, dataUrl, filename) => {
   
   const title = document.createElement('span');
   title.className = 'preview-title';
-  title.textContent = `Page ${pageNum}`;
+  title.textContent = t.pageNumber(pageNum);
   
   const downloadBtn = document.createElement('button');
   downloadBtn.className = 'download-single-btn';
-  downloadBtn.title = 'Download this page';
+  downloadBtn.title = t.downloadThisPage;
   downloadBtn.innerHTML = '<i class="fa-solid fa-download"></i>';
   downloadBtn.onclick = (e) => {
     e.stopPropagation();
@@ -391,7 +429,7 @@ const createPageToolbar = (container, pageNum) => {
   
   const rotateLeft = document.createElement('button');
   rotateLeft.className = 'toolbar-btn';
-  rotateLeft.title = 'Rotate Counter-Clockwise';
+  rotateLeft.title = t.rotateCCW;
   rotateLeft.innerHTML = '<i class="fa-solid fa-rotate-left"></i>';
   rotateLeft.addEventListener('click', async (e) => {
     e.stopPropagation();
@@ -402,7 +440,7 @@ const createPageToolbar = (container, pageNum) => {
   
   const rotateRight = document.createElement('button');
   rotateRight.className = 'toolbar-btn';
-  rotateRight.title = 'Rotate Clockwise';
+  rotateRight.title = t.rotateCW;
   rotateRight.innerHTML = '<i class="fa-solid fa-rotate-right"></i>';
   rotateRight.addEventListener('click', async (e) => {
     e.stopPropagation();
@@ -435,13 +473,13 @@ const updateDownloadBtnLabel = () => {
   const labelText = downloadAllBtn.querySelector('span');
   
   if (selectedCount === totalCount) {
-    labelText.textContent = 'Download All (ZIP)';
+    labelText.textContent = t.downloadAll;
     downloadAllBtn.removeAttribute('disabled');
   } else if (selectedCount > 0) {
-    labelText.textContent = `Download Selected (${selectedCount}) (ZIP)`;
+    labelText.textContent = t.downloadSelected(selectedCount);
     downloadAllBtn.removeAttribute('disabled');
   } else {
-    labelText.textContent = 'Download Selected (ZIP)';
+    labelText.textContent = t.downloadSelectedPlaceholder;
     downloadAllBtn.setAttribute('disabled', 'true');
   }
 };
@@ -453,7 +491,7 @@ downloadAllBtn.addEventListener('click', async () => {
   
   downloadAllBtn.setAttribute('disabled', 'true');
   const originalHtml = downloadAllBtn.innerHTML;
-  downloadAllBtn.innerHTML = '<span class="spinner"></span> Packaging ZIP...';
+  downloadAllBtn.innerHTML = `<span class="spinner"></span> ${t.packagingZip}`;
   
   try {
     const zip = new JSZip();
@@ -476,7 +514,7 @@ downloadAllBtn.addEventListener('click', async () => {
     document.body.removeChild(link);
   } catch (error) {
     console.error(error);
-    alert('Failed to package zip file.');
+    alert(t.failedZip);
   } finally {
     downloadAllBtn.innerHTML = originalHtml;
     updateDownloadBtnLabel();

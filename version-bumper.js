@@ -27,11 +27,27 @@ fs.writeFileSync(versionFile, JSON.stringify(versionData, null, 2), 'utf8');
 
 console.log(`\n🚀 Bumping version to: v${newVersion}`);
 
-// Dynamically read all HTML files in the current directory
-const htmlFiles = fs.readdirSync(__dirname).filter(file => file.endsWith('.html'));
+// Dynamically read all HTML files recursively in the project
+const getHtmlFiles = (dir) => {
+  let results = [];
+  const list = fs.readdirSync(dir);
+  list.forEach(file => {
+    if (file === 'node_modules' || file === '.git') return;
+    const filePath = path.join(dir, file);
+    const stat = fs.statSync(filePath);
+    if (stat && stat.isDirectory()) {
+      results = results.concat(getHtmlFiles(filePath));
+    } else if (file.endsWith('.html')) {
+      results.push(filePath);
+    }
+  });
+  return results;
+};
 
-htmlFiles.forEach(file => {
-  const filePath = path.join(__dirname, file);
+const htmlFiles = getHtmlFiles(__dirname);
+
+htmlFiles.forEach(filePath => {
+  const file = path.relative(__dirname, filePath);
   if (!fs.existsSync(filePath)) {
     console.log(`⚠️  File not found: ${file}`);
     return;
@@ -45,10 +61,12 @@ htmlFiles.forEach(file => {
     content = content.replace(spanRegex, `<span id="app-version" style="margin-left: 8px; opacity: 0.6; font-size: 0.85em;">v${newVersion}</span>`);
     console.log(`✅ Updated version to v${newVersion} in ${file}`);
   } else {
-    // Inject it for the first time next to copyright notice
-    const copyrightString = 'All rights reserved.</p>';
-    if (content.includes(copyrightString)) {
-      content = content.replace(copyrightString, `All rights reserved. <span id="app-version" style="margin-left: 8px; opacity: 0.6; font-size: 0.85em;">v${newVersion}</span></p>`);
+    // Inject it next to copyright notice (supports English and Hindi copyright texts)
+    const copyrightRegex = /(All rights reserved\.|सभी अधिकार सुरक्षित।)<\/p>/;
+    if (copyrightRegex.test(content)) {
+      content = content.replace(copyrightRegex, (match, p1) => {
+        return `${p1} <span id="app-version" style="margin-left: 8px; opacity: 0.6; font-size: 0.85em;">v${newVersion}</span></p>`;
+      });
       console.log(`➕ Injected version v${newVersion} in ${file}`);
     } else {
       console.log(`❌ Could not inject version in ${file} (Copyright text mismatch)`);

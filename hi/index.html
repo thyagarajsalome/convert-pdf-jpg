@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>मुफ़्त ऑनलाइन पीडीएफ से जेपीजी कनवर्टर - 100% सुरक्षित और निजी | convertpdftojpg.in</title>
+  <meta name="description" content="अपने ब्राउज़र में तुरंत पीडीएफ फाइलों को उच्च गुणवत्ता वाले जेपीजी, पीएनजी, या वेबपी छवियों में बदलें। 100% निजी, मुफ़्त और सुरक्षित। फाइलें कभी आपके डिवाइस से बाहर नहीं जातीं।">
+  <meta name="keywords" content="pdf to jpg, pdf ko jpg me badle, pdf se image convert kare, convert pdf to jpg in hindi, free pdf to jpg converter online">
+  <meta name="author" content="convertpdftojpg.in">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🖼️</text></svg>">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    body {
+      font-family: 'Noto Sans Devanagari', 'Outfit', sans-serif;
+    }
+  </style>
+  
+  <!-- PDF.js & JSZip Libraries from CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+</head>
+<body data-theme="dark">
+
+  <!-- Background Decorative Glowing Lights -->
+  <div class="glow-bg"></div>
+  <div class="glow-bg-secondary"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="nav-container">
+      <a href="../index.html" class="logo">
+        <i class="fa-solid fa-file-image"></i>
+        <span>Convert<span class="gradient-text">PDF</span>to<span class="gradient-text">JPG</span><span style="opacity: 0.6; font-size: 0.85em; font-weight: 600; margin-left: 1px;">.in</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html">PDF to JPG</a></li>
+        <li><a href="../jpg-to-pdf.html">JPG to PDF</a></li>
+        <li><a href="../compress-pdf.html">Compress PDF</a></li>
+        <li><a href="../merge-pdf.html">Merge PDF</a></li>
+        <li><a href="../index.html" style="color: var(--accent-secondary); font-weight: 700;">English</a></li>
+        <li>
+          <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle dark/light theme">
+            <i class="fa-solid fa-sun"></i>
+          </button>
+        </li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1>पीडीएफ को इमेज में बदलें <span class="gradient-text">तुरंत और निजी तौर पर</span></h1>
+      <p>100% मुफ़्त, ब्राउज़र-आधारित कनवर्टर। आपकी फ़ाइलें आपके कंप्यूटर पर स्थानीय रूप से प्रोसेस होती हैं, जिससे पूर्ण डेटा सुरक्षा और गोपनीयता सुनिश्चित होती है।</p>
+    </section>
+
+    <!-- Ad Space (Top Placement) -->
+    <div class="ad-slot" id="top-ad-slot">
+      <span>विज्ञापन स्थान (ADVERTISEMENT PLACEHOLDER)</span>
+    </div>
+
+    <!-- Converter Section -->
+    <section class="converter-container">
+      
+      <!-- Drag & Drop Zone -->
+      <div class="drop-zone" id="drop-zone">
+        <div class="drop-zone-icon">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+        </div>
+        <div class="drop-zone-text">अपनी पीडीएफ फाइल को यहां खींचें और छोड़ें (Drag & Drop)</div>
+        <div class="drop-zone-subtext">या अपने डिवाइस से फाइल चुनने के लिए क्लिक करें (200MB तक की फाइलों का समर्थन)</div>
+        <input type="file" id="file-input" accept="application/pdf">
+      </div>
+
+      <!-- File Details Card (Visible after file select) -->
+      <div class="file-meta-card" id="file-meta-card" style="display: none;">
+        <div class="file-info">
+          <div class="file-icon"><i class="fa-solid fa-file-pdf"></i></div>
+          <div class="file-details">
+            <div class="file-name" id="file-name">document.pdf</div>
+            <div class="file-size" id="file-size">0 KB</div>
+          </div>
+        </div>
+        <button class="remove-btn" id="remove-btn" title="फाइल हटाएं">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <!-- Advanced Features Option Grid -->
+      <div class="options-grid">
+        <!-- DPI selector -->
+        <div class="control-panel-group">
+          <div class="panel-title"><i class="fa-solid fa-expand"></i> आउटपुट DPI (रिज़ॉल्यूशन)</div>
+          <div class="dpi-selector">
+            <button type="button" class="dpi-btn" data-dpi="150" title="कम फाइल साइज के लिए उपयुक्त">150 DPI</button>
+            <button type="button" class="dpi-btn active" data-dpi="300" title="गुणवत्ता और आकार का आदर्श संतुलन">300 DPI</button>
+            <button type="button" class="dpi-btn" data-dpi="450" title="उच्च रिज़ॉल्यूशन प्रिंट गुणवत्ता">450 DPI</button>
+          </div>
+        </div>
+
+        <!-- Format Selector -->
+        <div class="control-panel-group">
+          <div class="panel-title"><i class="fa-solid fa-image"></i> आउटपुट इमेज फॉर्मेट</div>
+          <div class="format-selector">
+            <button type="button" class="format-btn active" data-format="image/jpeg" title="मानक JPG फाइल कंप्रेशन">JPG</button>
+            <button type="button" class="format-btn" data-format="image/png" title="पारदर्शी PNG फॉर्मेट">PNG</button>
+            <button type="button" class="format-btn" data-format="image/webp" title="नेक्स्ट-जेन उच्च वेब कंप्रेशन">WebP</button>
+          </div>
+        </div>
+
+        <!-- Quality Range Slider -->
+        <div class="control-panel-group">
+          <div class="panel-title"><i class="fa-solid fa-sliders"></i> कंप्रेशन गुणवत्ता (Quality)</div>
+          <div class="slider-container">
+            <input type="range" id="quality-slider" class="range-slider" min="10" max="100" value="90">
+            <span class="slider-val" id="quality-val">90%</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Area -->
+      <div class="actions-container">
+        <button type="button" class="btn-primary" id="convert-btn" disabled>
+          <i class="fa-solid fa-gears"></i>
+          <span>पीडीएफ पेज बदलें</span>
+        </button>
+      </div>
+
+      <!-- Live Progress Bar -->
+      <div class="progress-container" id="progress-container">
+        <div class="progress-status">
+          <span id="progress-text">दस्तावेज़ तैयार किया जा रहा है...</span>
+          <span id="progress-percent">0%</span>
+        </div>
+        <div class="progress-bar-wrapper">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+      </div>
+
+      <!-- Live Previews Grid -->
+      <div class="preview-section" id="preview-section">
+        <div class="preview-header">
+          <h2>बदले गए पेज</h2>
+          <div class="preview-grid-controls">
+            <button type="button" class="btn-secondary" id="select-all-btn">सभी चुनें</button>
+            <button type="button" class="btn-secondary" id="deselect-all-btn">सभी हटाएं</button>
+            <button type="button" class="btn-primary" id="download-all-btn" disabled>
+              <i class="fa-solid fa-file-zipper"></i>
+              <span>सभी डाउनलोड करें (ZIP)</span>
+            </button>
+          </div>
+        </div>
+        <div class="preview-grid" id="preview-grid">
+          <!-- Dynamically populated page cards will appear here -->
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Ad Space (Middle Placement) -->
+    <div class="ad-slot" id="middle-ad-slot">
+      <span>विज्ञापन स्थान (ADVERTISEMENT PLACEHOLDER)</span>
+    </div>
+
+    <!-- SEO Content Section & FAQs -->
+    <section class="info-section">
+      
+      <!-- Informative SEO text explaining benefits -->
+      <div class="seo-content">
+        <h2>ऑनलाइन पीडीएफ से जेपीजी बदलने का सबसे सुरक्षित तरीका</h2>
+        <p>अधिकांश पारंपरिक ऑनलाइन कनवर्टर टूल आपकी पीडीएफ फाइलों को अपने क्लाउड सर्वर पर अपलोड करते हैं। यह आपकी व्यक्तिगत जानकारी जैसे अनुबंध, टैक्स फॉर्म, या प्रमाण पत्रों के लिए गंभीर सुरक्षा जोखिम पैदा करता है। **convertpdftojpg.in** स्थानीय इंजन तकनीक पर काम करता है। सभी रेंडरिंग और कन्वर्शन प्रक्रियाएं आपके अपने कंप्यूटर पर ऑफलाइन होती हैं। आपकी फाइलें कभी भी सर्वर पर अपलोड नहीं की जाती हैं, जिससे आपकी गोपनीयता बनी रहती है।</p>
+        
+        <div class="steps-timeline">
+          <div class="step-item">
+            <div class="step-num">1</div>
+            <div class="step-text">
+              <h3>पीडीएफ चुनें और बदलें</h3>
+              <p>अपनी पीडीएफ फ़ाइल अपलोड करें। रिज़ॉल्यूशन (DPI), फ़ाइल फ़ॉर्मेट (JPG, PNG, WebP) और कंप्रेशन क्वालिटी सेट करें।</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-num">2</div>
+            <div class="step-text">
+              <h3>पेज रोटेट और सेलेक्ट करें</h3>
+              <p>दस्तावेज़ के पेज तुरंत दिखने लगेंगे। आप पेजों को घुमा (Rotate) सकते हैं या केवल आवश्यक पेजों को चुनने के लिए चेकबॉक्स का उपयोग कर सकते हैं।</p>
+            </div>
+          </div>
+          
+          <div class="step-item">
+            <div class="step-num">3</div>
+            <div class="step-text">
+              <h3>तुरंत डाउनलोड करें</h3>
+              <p>व्यक्तिगत पेजों को सीधे डाउनलोड करें या अपने चुने हुए पेजों को एक ही कंप्रेस्ड ZIP फ़ाइल में तुरंत सहेजें।</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sidebar with Guarantee & FAQs -->
+      <div class="sidebar">
+        
+        <div class="guarantee-card">
+          <i class="fa-solid fa-shield-halved"></i>
+          <h3>100% डेटा गोपनीयता गारंटी</h3>
+          <p>आपकी पीडीएफ फाइलें आपके ब्राउज़र के भीतर पूरी तरह से ऑफलाइन कन्वर्ट की जाती हैं। कोई फाइल हमारे सर्वर पर नहीं भेजी जाती है।</p>
+        </div>
+
+        <div class="faq-accordion">
+          <h2>अक्सर पूछे जाने वाले प्रश्न (FAQs)</h2>
+          
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>क्या मेरा डेटा यहाँ सुरक्षित है?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>हाँ, बिल्कुल। कन्वर्शन आपके डिवाइस पर ही होता है। आपकी फाइलें हमारे सर्वर पर कभी नहीं जाती हैं, जिससे यह पूरी तरह से निजी और सुरक्षित है।</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>क्या फ़ाइल आकार की कोई सीमा है?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>चूंकि फाइलें आपके अपने डिवाइस की रैम और प्रोसेसर का उपयोग करके कन्वर्ट की जाती हैं, हम 200MB तक की बड़ी फाइलों का समर्थन करते हैं!</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>मैं किन फॉर्मेट में एक्सपोर्ट कर सकता हूँ?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>आप पीडीएफ को मानक JPG, पारदर्शी PNG, या हल्के WebP फॉर्मेट में बदल सकते हैं। इसके अलावा साइज कम करने के लिए क्वालिटी भी बदल सकते हैं।</p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question">
+              <span>क्या मैं विशिष्ट पेजों को चुन या घुमा सकता हूँ?</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </button>
+            <div class="faq-answer">
+              <p>हाँ। प्रत्येक पेज थंबनेल में घुमाने (Rotate) के बटन और चेकबॉक्स उपलब्ध हैं। आप पेजों को घुमा सकते हैं और केवल चुनिंदा पेजों को ही डाउनलोड कर सकते हैं।</p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <a href="../index.html" class="logo">
+          <i class="fa-solid fa-file-image"></i>
+          <span>Convert<span class="gradient-text">PDF</span>to<span class="gradient-text">JPG</span><span style="opacity: 0.6; font-size: 0.85em; font-weight: 600; margin-left: 1px;">.in</span></span>
+        </a>
+        <p>आपके ब्राउज़र में तुरंत आपकी पीडीएफ फाइलों को उच्च गुणवत्ता वाली जेपीजी छवियों में बदलने के लिए एक तेज़, मुफ़्त और सुरक्षित उपकरण।</p>
+      </div>
+      
+      <div class="footer-links-group">
+        <div class="footer-column">
+          <h4>उपयोगिता (Utility)</h4>
+          <ul>
+            <li><a href="../index.html">PDF to JPG Converter</a></li>
+            <li><a href="../jpg-to-pdf.html">JPG to PDF Converter</a></li>
+            <li><a href="../compress-pdf.html">Compress PDF Converter</a></li>
+            <li><a href="../merge-pdf.html">Merge PDF Converter</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>कंपनी</h4>
+          <ul>
+            <li><a href="../about.html">हमारे बारे में</a></li>
+            <li><a href="../contact.html">संपर्क करें</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-column">
+          <h4>कानूनी</h4>
+          <ul>
+            <li><a href="../privacy.html">गोपनीयता नीति</a></li>
+            <li><a href="../terms.html">सेवा की शर्तें</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>&copy; 2026 convertpdftojpg.in. सभी अधिकार सुरक्षित। <span id="app-version" style="margin-left: 8px; opacity: 0.6; font-size: 0.85em;">v1.0.11</span></p>
+      <p>पूर्ण सुरक्षा के लिए स्थानीय रूप से प्रोसेस किया गया।</p>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../app.js"></script>
+</body>
+</html>
