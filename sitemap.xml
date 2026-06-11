@@ -7,14 +7,7 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
-  
-  <!-- Hindi Localized Homepage -->
-  <url>
-    <loc>https://convertpdftojpg.in/hi/</loc>
-    <lastmod>2026-06-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
+
 
   <!-- JPG to PDF Tool -->
   <url>

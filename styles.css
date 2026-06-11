@@ -1095,3 +1095,141 @@ footer {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* Mobile Responsive Enhancements */
+@media (max-width: 768px) {
+  /* Navigation Bar */
+  .nav-container {
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.25rem 1rem;
+    text-align: center;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0;
+  }
+  
+  /* Hero Section */
+  .hero-section {
+    padding: 1rem 0.5rem;
+  }
+  .hero-section h1 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+  }
+  .hero-section p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Main Container padding */
+  .converter-container {
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+  }
+  
+  /* Drop Zone */
+  .drop-zone {
+    padding: 3rem 1rem;
+  }
+  .drop-zone-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+  .drop-zone-text {
+    font-size: 1.15rem;
+  }
+  
+  /* File Meta Card */
+  .file-meta-card {
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  .file-info {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .file-name {
+    font-size: 1rem;
+    max-width: 80vw;
+    text-align: center;
+  }
+  
+  /* Options Grid spacing */
+  .options-grid {
+    gap: 1.25rem;
+    padding: 1.25rem;
+  }
+  
+  /* Action Buttons */
+  .actions-container {
+    justify-content: center;
+    width: 100%;
+  }
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+  }
+  
+  /* Preview Section Header */
+  .preview-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  .preview-grid-controls {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .preview-grid-controls button {
+    width: 100%;
+  }
+  .preview-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+  }
+  
+  /* Static Content Pages */
+  .static-page-container {
+    padding: 2rem 1.25rem;
+  }
+  .static-page-container h1 {
+    font-size: 2rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  /* Footer layout */
+  footer {
+    padding: 3rem 1rem 1.5rem 1rem;
+    margin-top: 4rem;
+  }
+  .footer-container {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2.5rem;
+  }
+  .footer-brand {
+    max-width: 100%;
+  }
+  .footer-links-group {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  .footer-column {
+    align-items: center;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+}

@@ -2,7 +2,6 @@
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
 // Language Localization
-const isHindi = document.documentElement.lang === 'hi';
 const translations = {
   en: {
     invalidFormat: 'Invalid file format. Please upload a PDF file.',
@@ -20,26 +19,9 @@ const translations = {
     packagingZip: 'Packaging ZIP...',
     failedZip: 'Failed to package zip file.',
     convertBtnText: (format) => `Convert PDF to ${format}`
-  },
-  hi: {
-    invalidFormat: 'अमान्य फ़ाइल स्वरूप। कृपया एक पीडीएफ फ़ाइल अपलोड करें।',
-    readingPdf: 'पीडीएफ पढ़ी जा रही है...',
-    renderingPage: (i, total) => `पेज ${i} का ${total} रेंडर किया जा रहा है...`,
-    conversionComplete: 'रूपांतरण पूरा हुआ!',
-    errorConverting: 'पीडीएफ को बदलने में त्रुटि। कृपया सुनिश्चित करें कि दस्तावेज़ दूषित या पासवर्ड सुरक्षित नहीं है।',
-    pageNumber: (num) => `पेज ${num}`,
-    downloadThisPage: 'इस पेज को डाउनलोड करें',
-    rotateCCW: 'वामावर्त घुमाएं',
-    rotateCW: 'दक्षिणावर्त घुमाएं',
-    downloadAll: 'सभी डाउनलोड करें (ZIP)',
-    downloadSelected: (count) => `चुने गए डाउनलोड करें (${count}) (ZIP)`,
-    downloadSelectedPlaceholder: 'चुने गए डाउनलोड करें (ZIP)',
-    packagingZip: 'ZIP फ़ाइल तैयार की जा रही है...',
-    failedZip: 'ZIP फ़ाइल तैयार करने में विफल।',
-    convertBtnText: (format) => `पीडीएफ को ${format} में बदलें`
   }
 };
-const t = isHindi ? translations.hi : translations.en;
+const t = translations.en;
 
 // DOM Elements
 const dropZone = document.getElementById('drop-zone');
